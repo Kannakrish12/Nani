@@ -37,7 +37,7 @@ export async function askVaultAI(
     items: cl.items.map(i => `${i.label} (${i.completed ? 'COMPLETED' : 'PENDING'})`),
   }));
 
-  const systemInstruction = `You are VaultAI, the intelligent and private academic document assistant for UniVault — the Smart Student Digital Locker.
+  const systemInstruction = `You are VaultAI Pro, the high-performance intelligent student credential assistant for Privora — the Smart Student Digital Locker.
 
 Current Authenticated Student: ${studentName}
 
@@ -47,12 +47,16 @@ ${JSON.stringify(docsContext, null, 2)}
 STUDENT'S APPLICATION CHECKLISTS:
 ${JSON.stringify(checklistsContext, null, 2)}
 
-CRITICAL SECURITY & BEHAVIOR RULES:
-1. You have access ONLY to this specific authenticated student's documents. NEVER reference or speculate about any other student's data.
-2. Provide concise, helpful, and accurate answers regarding their academic credentials, certificates, transcripts, identity papers, financial records, and application readiness.
-3. If asked about expiring documents, calculate against the current date (assume year 2026) and highlight urgent or upcoming deadlines.
-4. If asked what documents are missing for scholarship, internship, or college applications, compare the student's stored documents with typical application requirements and their active checklists.
-5. Maintain a professional, supportive, and privacy-first tone. Keep responses formatted with clean Markdown bullet points.`;
+PRO AGENT CAPABILITIES & BEHAVIOR:
+1. Privacy & Scoping: You have access ONLY to this specific authenticated student's documents. Never hallucinate or access external student records.
+2. Document Identification: When mentioning a document, enclose its exact name in quotes or backticks, e.g. \`Semester 5 Official Grade Transcript\` or "Annual Family Income Certificate 2025-26".
+3. Audits & Scores: When asked to audit, calculate:
+   - Total Documents & Categories
+   - Document Health & Security score out of 100%
+   - Expiration status against current year (2026)
+   - Application Readiness (Scholarships, Internships, Placements, University Clearances)
+4. Formatting: Use clean Markdown with bold headers, concise bullet points, status indicators (✅, ⚠️, 🚨, ⏳), and actionable recommendations.
+5. Provide clear follow-up actions like sharing links, setting renewal reminders, or organizing tags.`;
 
   if (apiKey && apiKey !== 'MY_GEMINI_API_KEY') {
     try {
@@ -174,7 +178,65 @@ function generateLocalVaultAIResponse(
     return `I found **${careerDocs.length} career & achievement documents** in your vault:\n\n${list}\n\nYou can generate secure temporary 24-hour links to share these with recruiters.`;
   }
 
-  // 5. Total count / What documents do I have
+  // 5. Comprehensive Vault Audit & Health Score
+  if (lower.includes('audit') || lower.includes('health') || lower.includes('score') || lower.includes('compliance')) {
+    const expiredCount = docs.filter(d => d.expiryDate && new Date(d.expiryDate).getTime() < Date.now()).length;
+    const expiringSoonCount = docs.filter(d => {
+      if (!d.expiryDate) return false;
+      const days = Math.round((new Date(d.expiryDate).getTime() - Date.now()) / (1000 * 3600 * 24));
+      return days > 0 && days <= 60;
+    }).length;
+
+    const hasAcademic = docs.some(d => d.category === 'Academic');
+    const hasIdentity = docs.some(d => d.category === 'Identity');
+    const hasCareer = docs.some(d => d.category === 'Career' || d.category === 'Achievements');
+
+    let healthScore = 100;
+    if (expiredCount > 0) healthScore -= 25;
+    if (expiringSoonCount > 0) healthScore -= 10;
+    if (!hasAcademic) healthScore -= 20;
+    if (!hasIdentity) healthScore -= 20;
+    if (!hasCareer) healthScore -= 15;
+    healthScore = Math.max(20, Math.min(100, healthScore));
+
+    const statusBadge = healthScore >= 85 ? '🟢 EXCELLENT' : healthScore >= 65 ? '🟡 MODERATE' : '🔴 ACTION REQUIRED';
+
+    return `### 🛡️ Privora Pro Security & Health Audit
+
+**Overall Vault Health Score: ${healthScore}/100 (${statusBadge})**
+
+#### 📊 Catalog Analysis:
+- **Total Encrypted Records**: ${docs.length} documents
+- **Academic Transcripts**: ${hasAcademic ? '✅ Present' : '❌ Missing official memo'}
+- **Identity Credentials**: ${hasIdentity ? '✅ Verified' : '⚠️ Need Government ID / Campus Card'}
+- **Career & Achievements**: ${hasCareer ? '✅ Present' : '⚠️ No internship/certificates found'}
+
+#### ⏳ Expiration Sentinel:
+- **Expired Records**: ${expiredCount > 0 ? `🚨 ${expiredCount} document(s) expired` : '✅ None'}
+- **Expiring within 60 days**: ${expiringSoonCount > 0 ? `⚠️ ${expiringSoonCount} document(s) require renewal` : '✅ All clear'}
+
+#### 🎯 Recommended Action:
+${expiredCount > 0 ? '1. Renew or upload fresh copies of expired credentials.\n' : ''}${!hasCareer ? '2. Upload your latest resume or internship proof in Career category.\n' : ''}3. Use **Secure Share** to generate protected temporary links when sending records to third parties.`;
+  }
+
+  // 6. Graduation & Degree Clearance
+  if (lower.includes('graduat') || lower.includes('degree clearance') || lower.includes('alumni')) {
+    const transcripts = docs.filter(d => d.name.toLowerCase().includes('transcript') || d.name.toLowerCase().includes('grade') || d.name.toLowerCase().includes('memo'));
+    const idDocs = docs.filter(d => d.category === 'Identity');
+    const noDues = docs.some(d => d.name.toLowerCase().includes('dues') || d.name.toLowerCase().includes('clearance') || d.name.toLowerCase().includes('library'));
+
+    return `### 🎓 Graduation & Degree Clearance Evaluation
+
+Privora evaluated your records against standard university degree conferral checklists:
+
+- ${transcripts.length >= 1 ? '✅' : '❌'} **Official Transcripts & Grade Sheets**: ${transcripts.length > 0 ? `${transcripts.length} semester record(s) cataloged` : 'Missing official transcript'}
+- ${idDocs.length >= 1 ? '✅' : '❌'} **Institutional Student ID Verification**: ${idDocs.length > 0 ? 'Identity authenticated' : 'Student ID card required'}
+- ${noDues ? '✅' : '⚠️'} **Department & Library No-Dues Attestation**: ${noDues ? 'Clearance uploaded' : 'Pending institutional submission'}
+
+**Clearance Status**: ${transcripts.length > 0 && idDocs.length > 0 ? '🟢 80% Ready — Complete department no-dues' : '🟡 Incomplete — Upload remaining semester memos'}`;
+  }
+
+  // 7. Total count / What documents do I have
   if (lower.includes('what document') || lower.includes('how many') || lower.includes('list') || lower.includes('overview')) {
     const categories: Record<string, number> = {};
     docs.forEach(d => {
@@ -185,17 +247,18 @@ function generateLocalVaultAIResponse(
       .map(([cat, count]) => `- **${cat}**: ${count} document${count > 1 ? 's' : ''}`)
       .join('\n');
 
-    return `You currently have **${docs.length} secure documents** stored in UniVault:\n\n${catSummary}\n\nAll documents are encrypted, isolated to your student profile, and accessible for secure temporary sharing.`;
+    return `You currently have **${docs.length} secure documents** stored in Privora:\n\n${catSummary}\n\nAll documents are encrypted, isolated to your student profile, and accessible for secure temporary sharing.`;
   }
 
   // Default helpful response
   return `I have analyzed your **${docs.length} stored documents** and **${checklists.length} active checklists**. 
 
 You can ask me to:
-- Find specific documents (e.g., *"Show my academic certificates"*)
-- Check expiring records (e.g., *"Which documents expire soon?"*)
-- Review requirements for applications (e.g., *"What documents do I have for scholarship applications?"*)
-- Check career credentials (e.g., *"Find my internship offer letter"*)
+- 🛡️ Run a full vault audit (*"Audit my locker health score"*)
+- 🎓 Check graduation clearance (*"Am I ready for graduation clearance?"*)
+- 🏆 Review application checklists (*"What is missing for my scholarship?"*)
+- ⏳ Check expiration dates (*"Which documents expire soon?"*)
+- 💼 Inspect career records (*"Find my internship documents"*)
 
 What would you like me to inspect for you?`;
 }

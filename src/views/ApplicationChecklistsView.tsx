@@ -168,13 +168,13 @@ export const ApplicationChecklistsView: React.FC = () => {
     });
 
     content += `\n-------------------------------------------------------\n`;
-    content += `Cryptographically signed and stamped by UniVault Digital Student Locker.\n`;
+    content += `Cryptographically signed and stamped by Privora Digital Student Locker.\n`;
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = window.document.createElement('a');
     a.href = url;
-    a.download = `UniVault_Dossier_${activeChecklist.title.replace(/[^a-z0-9]/gi, '_')}.txt`;
+    a.download = `Privora_Dossier_${activeChecklist.title.replace(/[^a-z0-9]/gi, '_')}.txt`;
     window.document.body.appendChild(a);
     a.click();
     window.document.body.removeChild(a);

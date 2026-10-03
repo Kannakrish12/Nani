@@ -16,6 +16,9 @@ import {
   CheckCircle2,
   Trash2,
   Clock,
+  AlertTriangle,
+  Share2,
+  FileText,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -31,12 +34,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenMobileMenu,
   onOpenUpload,
 }) => {
-  const { user, logout, demoLoginStudent, demoLoginAdmin } = useAuth();
+  const { user, logout } = useAuth();
   const { notifications, markNotificationRead, markAllNotificationsRead, clearNotifications, searchQuery, setSearchQuery } = useLocker();
   const [showNotifs, setShowNotifs] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [notifFilter, setNotifFilter] = useState<'all' | 'unread'>('all');
 
   const unreadCount = notifications.filter(n => !n.read).length;
+  const filteredNotifications = notifFilter === 'unread' ? notifications.filter(n => !n.read) : notifications;
+
+  const handleNotificationClick = (n: typeof notifications[0]) => {
+    markNotificationRead(n.id);
+    setShowNotifs(false);
+
+    if (n.type === 'expiry' || n.title.toLowerCase().includes('expir')) {
+      setCurrentView('expiry-alerts');
+    } else if (n.type === 'share' || n.title.toLowerCase().includes('share') || n.title.toLowerCase().includes('link')) {
+      setCurrentView('share-manage');
+    } else if (n.type === 'upload' || n.title.toLowerCase().includes('upload') || n.title.toLowerCase().includes('store')) {
+      setCurrentView('locker');
+    } else if (n.type === 'security' || n.title.toLowerCase().includes('security') || n.title.toLowerCase().includes('login')) {
+      setCurrentView('security');
+    } else {
+      setCurrentView('dashboard');
+    }
+  };
 
   return (
     <header className="sticky top-0 z-30 h-16 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 px-4 sm:px-6 flex items-center justify-between">
@@ -58,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="w-8 h-8 rounded-lg overflow-hidden border border-blue-500/30 flex items-center justify-center bg-blue-950/40">
               <img
                 src="/src/assets/images/univault_brand_mark_1791018781344.jpg"
-                alt="UniVault"
+                alt="Privora"
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = 'none';
@@ -67,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Lock className="w-4 h-4 text-blue-400" />
             </div>
             <span className="font-bold text-base sm:text-lg tracking-tight text-white group-hover:text-blue-400 transition-colors">
-              UniVault
+              Privora
             </span>
           </div>
 
@@ -156,74 +178,144 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="relative">
           <button
             onClick={() => setShowNotifs(!showNotifs)}
-            className="relative p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="relative min-w-[40px] min-h-[40px] flex items-center justify-center text-slate-400 hover:text-white rounded-lg hover:bg-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer touch-manipulation"
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4" />
             {unreadCount > 0 && (
-              <span className="absolute top-1 right-1 w-2 h-2 bg-blue-500 rounded-full ring-2 ring-slate-950" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full ring-2 ring-slate-950 animate-pulse" />
             )}
           </button>
 
           {showNotifs && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 overflow-hidden">
-              <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-white">Notifications</span>
-                  {unreadCount > 0 && (
-                    <span className="text-[10px] bg-blue-950 text-blue-400 border border-blue-800 px-1.5 py-0.5 rounded-md font-mono">
-                      {unreadCount} new
-                    </span>
+            <>
+              {/* Click-outside backdrop */}
+              <div
+                className="fixed inset-0 z-40"
+                onClick={() => setShowNotifs(false)}
+              />
+
+              <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl z-50 overflow-hidden backdrop-blur-md">
+                {/* Header */}
+                <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950/70">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold text-white">Notifications</span>
+                    {unreadCount > 0 && (
+                      <span className="text-[10px] bg-blue-950 text-blue-400 border border-blue-800 px-1.5 py-0.5 rounded-md font-mono">
+                        {unreadCount} new
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => markAllNotificationsRead()}
+                      className="text-[11px] text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    >
+                      Mark all read
+                    </button>
+                    <span className="text-slate-700">·</span>
+                    <button
+                      onClick={() => clearNotifications()}
+                      className="text-[11px] text-slate-400 hover:text-red-400 transition-colors cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+
+                {/* Filter Tabs */}
+                <div className="px-3 py-1.5 bg-slate-950/40 border-b border-slate-800/80 flex items-center gap-1">
+                  <button
+                    onClick={() => setNotifFilter('all')}
+                    className={`px-2.5 py-0.5 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                      notifFilter === 'all'
+                        ? 'bg-blue-600/30 text-blue-300 border border-blue-500/40'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    All ({notifications.length})
+                  </button>
+                  <button
+                    onClick={() => setNotifFilter('unread')}
+                    className={`px-2.5 py-0.5 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                      notifFilter === 'unread'
+                        ? 'bg-blue-600/30 text-blue-300 border border-blue-500/40'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    Unread ({unreadCount})
+                  </button>
+                </div>
+
+                {/* List Container */}
+                <div className="max-h-80 overflow-y-auto divide-y divide-slate-800/60">
+                  {filteredNotifications.length === 0 ? (
+                    <div className="p-6 text-center text-xs text-slate-500 space-y-2">
+                      <Bell className="w-6 h-6 mx-auto opacity-40 text-slate-400" />
+                      <div>No {notifFilter === 'unread' ? 'unread' : ''} notifications</div>
+                    </div>
+                  ) : (
+                    filteredNotifications.map((n) => {
+                      const isExpiry = n.type === 'expiry' || n.title.toLowerCase().includes('expir');
+                      const isShare = n.type === 'share' || n.title.toLowerCase().includes('share');
+                      const isUpload = n.type === 'upload' || n.title.toLowerCase().includes('upload');
+                      const isSecurity = n.type === 'security' || n.title.toLowerCase().includes('security');
+
+                      return (
+                        <div
+                          key={n.id}
+                          onClick={() => handleNotificationClick(n)}
+                          className={`p-3 text-xs cursor-pointer hover:bg-slate-800/50 transition-colors flex items-start gap-2.5 group relative ${
+                            !n.read ? 'bg-blue-950/20' : ''
+                          }`}
+                        >
+                          {/* Category Icon */}
+                          <div className={`p-1.5 rounded-lg shrink-0 mt-0.5 ${
+                            isExpiry
+                              ? 'bg-amber-950/60 border border-amber-800/60 text-amber-400'
+                              : isShare
+                              ? 'bg-purple-950/60 border border-purple-800/60 text-purple-400'
+                              : isUpload
+                              ? 'bg-blue-950/60 border border-blue-800/60 text-blue-400'
+                              : isSecurity
+                              ? 'bg-emerald-950/60 border border-emerald-800/60 text-emerald-400'
+                              : 'bg-slate-800 text-slate-400'
+                          }`}>
+                            {isExpiry ? (
+                              <AlertTriangle className="w-3.5 h-3.5" />
+                            ) : isShare ? (
+                              <Share2 className="w-3.5 h-3.5" />
+                            ) : isUpload ? (
+                              <FileText className="w-3.5 h-3.5" />
+                            ) : (
+                              <Bell className="w-3.5 h-3.5" />
+                            )}
+                          </div>
+
+                          <div className="flex-1 min-w-0 pr-4">
+                            <div className="flex items-start justify-between gap-1">
+                              <div className="font-semibold text-slate-200 group-hover:text-white flex items-center gap-1.5 truncate">
+                                {!n.read && <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />}
+                                <span className="truncate">{n.title}</span>
+                              </div>
+                              <span className="text-[10px] text-slate-500 shrink-0 font-mono">
+                                {new Date(n.createdAt).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <p className="text-slate-400 text-[11px] mt-0.5 line-clamp-2 leading-relaxed">
+                              {n.message}
+                            </p>
+                            <div className="text-[10px] text-blue-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity font-medium">
+                              Click to view details →
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
                   )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => markAllNotificationsRead()}
-                    className="text-[11px] text-slate-400 hover:text-white transition-colors"
-                  >
-                    Mark read
-                  </button>
-                  <span className="text-slate-700">·</span>
-                  <button
-                    onClick={() => clearNotifications()}
-                    className="text-[11px] text-slate-400 hover:text-red-400 transition-colors"
-                  >
-                    Clear
-                  </button>
-                </div>
               </div>
-
-              <div className="max-h-72 overflow-y-auto divide-y divide-slate-800/60">
-                {notifications.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-slate-500">
-                    No new notifications
-                  </div>
-                ) : (
-                  notifications.map((n) => (
-                    <div
-                      key={n.id}
-                      onClick={() => markNotificationRead(n.id)}
-                      className={`p-3 text-xs cursor-pointer hover:bg-slate-800/40 transition-colors ${
-                        !n.read ? 'bg-blue-950/20' : ''
-                      }`}
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="font-semibold text-slate-200 flex items-center gap-1.5">
-                          {!n.read && <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />}
-                          {n.title}
-                        </div>
-                        <span className="text-[10px] text-slate-500 shrink-0 font-mono">
-                          {new Date(n.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <p className="text-slate-400 text-[11px] mt-1 line-clamp-2 leading-relaxed">
-                        {n.message}
-                      </p>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
+            </>
           )}
         </div>
 
@@ -306,33 +398,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <span>Admin Console</span>
                   </button>
                 )}
-              </div>
-
-              {/* Demo Role Switcher in drop menu */}
-              <div className="pt-2 border-t border-slate-800">
-                <div className="px-3 py-1 text-[10px] text-slate-500 font-semibold uppercase tracking-wider">
-                  Quick Demo Switch
-                </div>
-                <button
-                  onClick={async () => {
-                    setShowProfileMenu(false);
-                    await demoLoginStudent();
-                    setCurrentView('dashboard');
-                  }}
-                  className="w-full text-left px-3 py-1 rounded-md text-[11px] text-slate-400 hover:bg-slate-800 hover:text-white"
-                >
-                  Switch to Student (Sarah Chen)
-                </button>
-                <button
-                  onClick={async () => {
-                    setShowProfileMenu(false);
-                    await demoLoginAdmin();
-                    setCurrentView('admin');
-                  }}
-                  className="w-full text-left px-3 py-1 rounded-md text-[11px] text-slate-400 hover:bg-slate-800 hover:text-white"
-                >
-                  Switch to Admin (Dr. Marcus)
-                </button>
               </div>
 
               <div className="pt-1 mt-1 border-t border-slate-800">

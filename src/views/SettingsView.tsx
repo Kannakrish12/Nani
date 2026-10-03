@@ -131,7 +131,7 @@ export const SettingsView: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = window.document.createElement('a');
     a.href = url;
-    a.download = `UniVault_Archive_${user?.studentId || 'Student'}_2026.json`;
+    a.download = `Privora_Archive_${user?.studentId || 'Student'}_2026.json`;
     window.document.body.appendChild(a);
     a.click();
     window.document.body.removeChild(a);
@@ -350,7 +350,7 @@ export const SettingsView: React.FC = () => {
                 className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg font-medium flex items-center gap-2 transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Export My UniVault Dossier (.json)</span>
+                <span>Export My Privora Dossier (.json)</span>
               </button>
             </div>
           </div>
@@ -363,7 +363,7 @@ export const SettingsView: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold text-white">Automated Alert Triggers</h3>
             <p className="text-slate-400 text-xs mt-0.5">
-              Configure how UniVault warns you about document expiration and sharing activities.
+              Configure how Privora warns you about document expiration and sharing activities.
             </p>
           </div>
 

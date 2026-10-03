@@ -326,8 +326,8 @@ export const LockerView: React.FC<LockerViewProps> = ({ onOpenUpload }) => {
         </div>
       ) : (
         /* List View */
-        <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-900/60">
-          <table className="w-full text-left text-xs">
+        <div className="border border-slate-800 rounded-xl overflow-x-auto bg-slate-900/60">
+          <table className="w-full text-left text-xs min-w-[560px]">
             <thead className="bg-slate-950/60 border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider font-semibold">
               <tr>
                 <th className="py-3 px-4">Document</th>

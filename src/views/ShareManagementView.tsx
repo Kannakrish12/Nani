@@ -66,7 +66,7 @@ export const ShareManagementView: React.FC<ShareManagementViewProps> = ({ onOpen
       <div className="p-4 bg-slate-900/60 border border-slate-800 rounded-xl flex items-start gap-3 text-xs text-slate-300">
         <ShieldCheck className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          UniVault never issues permanent public URLs for student documents. Every link generated is
+          Privora never issues permanent public URLs for student documents. Every link generated is
           time-bound, digitally signed, and auditable. Revoking a link terminates access instantaneously
           worldwide.
         </p>
@@ -89,8 +89,8 @@ export const ShareManagementView: React.FC<ShareManagementViewProps> = ({ onOpen
           </button>
         </div>
       ) : (
-        <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-900/60">
-          <table className="w-full text-left text-xs">
+        <div className="border border-slate-800 rounded-xl overflow-x-auto bg-slate-900/60">
+          <table className="w-full text-left text-xs min-w-[620px]">
             <thead className="bg-slate-950/60 border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider font-semibold">
               <tr>
                 <th className="py-3 px-4">Shared Document</th>

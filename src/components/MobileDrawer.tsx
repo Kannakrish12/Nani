@@ -16,6 +16,7 @@ import {
   Search,
   User,
   Settings,
+  Bell,
 } from 'lucide-react';
 
 interface MobileDrawerProps {
@@ -25,6 +26,15 @@ interface MobileDrawerProps {
   setCurrentView: (view: string) => void;
 }
 
+interface DrawerMenuItem {
+  id: string;
+  label: string;
+  icon: any;
+  badge?: number;
+  alertBadge?: number;
+  highlight?: boolean;
+}
+
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   isOpen,
   onClose,
@@ -32,7 +42,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   setCurrentView,
 }) => {
   const { user, logout } = useAuth();
-  const { stats, recycleBin } = useLocker();
+  const { stats, recycleBin, notifications } = useLocker();
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   if (!isOpen) return null;
 
@@ -41,13 +52,13 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     onClose();
   };
 
-  const menuItems = [
+  const menuItems: DrawerMenuItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'locker', label: 'My Locker', icon: FolderLock, badge: stats.total },
     { id: 'search', label: 'Smart Search', icon: Search },
     { id: 'vaultai', label: 'VaultAI Assistant', icon: Sparkles, highlight: true },
+    { id: 'expiry-alerts', label: 'Expiry Alerts & Notifs', icon: Bell, badge: unreadCount || (stats.expiringSoon + stats.expired) },
     { id: 'share-manage', label: 'Secure Share', icon: Share2 },
-    { id: 'expiry-alerts', label: 'Expiry Alerts', icon: AlertTriangle, alertBadge: stats.expiringSoon + stats.expired },
     { id: 'checklists', label: 'Application Checklists', icon: CheckSquare },
     { id: 'profile', label: 'My Profile & Digital ID', icon: User },
     { id: 'security', label: 'Security Center', icon: ShieldCheck },
@@ -77,7 +88,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         <div>
           <div className="flex items-center justify-between pb-4 border-b border-slate-800">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-lg text-white">UniVault</span>
+              <span className="font-bold text-lg text-white">Privora</span>
               <span className="text-xs text-blue-400 font-mono">Mobile</span>
             </div>
             <button

@@ -22,22 +22,18 @@ import {
 interface LandingPageProps {
   onLogin: () => void;
   onRegister: () => void;
-  onDemoStudent: () => void;
-  onDemoAdmin: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onLogin,
   onRegister,
-  onDemoStudent,
-  onDemoAdmin,
 }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const faqs = [
     {
-      q: 'How does UniVault ensure my documents remain strictly confidential?',
-      a: 'UniVault enforces cryptographic database Row-Level Security (RLS) and client-scoped permissions. Even university administrators cannot view your private document contents; administrative access is restricted to audit events and platform telemetry.',
+      q: 'How does Privora ensure my documents remain strictly confidential?',
+      a: 'Privora enforces cryptographic database Row-Level Security (RLS) and client-scoped permissions. Even university administrators cannot view your private document contents; administrative access is restricted to audit events and platform telemetry.',
     },
     {
       q: 'How does the VaultAI assistant work with my files?',
@@ -49,24 +45,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     },
     {
       q: 'Can I restore accidentally deleted documents?',
-      a: 'Yes. UniVault uses a two-phase deletion workflow. Deleted documents remain safely in your Recycle Bin where they can be restored with a single click before permanent shredding.',
+      a: 'Yes. Privora uses a two-phase deletion workflow. Deleted documents remain safely in your Recycle Bin where they can be restored with a single click before permanent shredding.',
     },
     {
       q: 'What formats and file sizes are supported?',
-      a: 'UniVault supports PDF transcripts, scanned IDs (PNG, JPG), Word documents (DOC, DOCX), spreadsheets, and presentation files up to 25MB per record.',
+      a: 'Privora supports PDF transcripts, scanned IDs (PNG, JPG), Word documents (DOC, DOCX), spreadsheets, and presentation files up to 25MB per record.',
     },
   ];
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
       {/* 1. TOP BAR CONTRACT: Single text brand + 4-6 links + 1-2 primary CTAs */}
-      <header className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         {/* Zone 1: Single text element wordmark */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg overflow-hidden border border-blue-500/30 flex items-center justify-center bg-blue-950/40">
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          <div className="w-8 h-8 rounded-lg overflow-hidden border border-blue-500/30 flex items-center justify-center bg-blue-950/40 shrink-0">
             <img
               src="/src/assets/images/univault_brand_mark_1791018781344.jpg"
-              alt="UniVault"
+              alt="Privora"
               className="w-full h-full object-cover"
               onError={(e) => {
                 (e.target as HTMLElement).style.display = 'none';
@@ -74,14 +70,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             />
             <Lock className="w-4 h-4 text-blue-400" />
           </div>
-          <a href="#" className="text-lg font-bold tracking-tight text-white">
-            UniVault
+          <a href="#" className="text-base sm:text-lg font-bold tracking-tight text-white">
+            Privora
           </a>
         </div>
 
         {/* Zone 2: 4-6 clean text navigation links */}
         <nav className="hidden md:flex items-center gap-7 text-xs font-medium text-slate-400">
-          <a href="#why-univault" className="hover:text-white transition-colors">Why UniVault</a>
+          <a href="#why-privora" className="hover:text-white transition-colors">Why Privora</a>
           <a href="#features" className="hover:text-white transition-colors">Features</a>
           <a href="#vaultai" className="hover:text-white transition-colors">VaultAI</a>
           <a href="#security" className="hover:text-white transition-colors">Security</a>
@@ -89,16 +85,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </nav>
 
         {/* Zone 3: 1-2 primary actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           <button
             onClick={onLogin}
-            className="text-xs font-semibold text-slate-300 hover:text-white transition-colors px-3 py-2"
+            className="text-xs font-semibold text-slate-300 hover:text-white transition-colors px-2 sm:px-3 py-2 cursor-pointer"
           >
-            Student Login
+            Login
           </button>
           <button
             onClick={onRegister}
-            className="px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-sm shadow-blue-500/20 transition-colors whitespace-nowrap"
+            className="px-3 sm:px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-sm shadow-blue-500/20 transition-colors whitespace-nowrap cursor-pointer"
           >
             Get Started
           </button>
@@ -134,29 +130,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </button>
           <button
             onClick={onLogin}
-            className="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 text-xs sm:text-sm font-semibold rounded-xl transition-colors"
+            className="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 text-xs sm:text-sm font-semibold rounded-xl transition-colors cursor-pointer"
           >
             Sign In with Email
           </button>
-        </div>
-
-        {/* 1-Click Demo Quick Starters */}
-        <div className="p-3 bg-slate-900/60 border border-slate-800/80 rounded-xl max-w-lg mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-          <span className="text-slate-400">Instant Demo Evaluation:</span>
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <button
-              onClick={onDemoStudent}
-              className="flex-1 sm:flex-none px-3 py-1.5 bg-blue-950 border border-blue-800/80 hover:bg-blue-900 text-blue-300 font-medium rounded-lg text-xs transition-colors"
-            >
-              Student (Sarah)
-            </button>
-            <button
-              onClick={onDemoAdmin}
-              className="flex-1 sm:flex-none px-3 py-1.5 bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-200 font-medium rounded-lg text-xs transition-colors"
-            >
-              Admin (Dr. Marcus)
-            </button>
-          </div>
         </div>
 
         {/* Hero Visual Mockup */}
@@ -164,7 +141,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="aspect-[16/9] max-h-[500px] w-full overflow-hidden bg-slate-950 flex items-center justify-center">
             <img
               src="/src/assets/images/univault_hero_preview_1791018731461.jpg"
-              alt="UniVault Dashboard Mockup"
+              alt="Privora Dashboard Mockup"
               className="w-full h-full object-cover object-center"
               onError={(e) => {
                 (e.target as HTMLElement).style.display = 'none';
@@ -175,14 +152,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* 3. WHY UNIVAULT? */}
-      <section id="why-univault" className="py-20 border-t border-slate-800/80 px-6 max-w-6xl mx-auto w-full">
+      {/* 3. WHY PRIVORA? */}
+      <section id="why-privora" className="py-20 border-t border-slate-800/80 px-6 max-w-6xl mx-auto w-full">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Designed for Student Mobility and University Compliance
           </h2>
           <p className="text-slate-400 text-sm mt-3 leading-relaxed">
-            Stop losing vital academic papers across email threads and cloud drives. UniVault centralizes your scholastic career in a privacy-guaranteed vault.
+            Stop losing vital academic papers across email threads and cloud drives. Privora centralizes your scholastic career in a privacy-guaranteed vault.
           </p>
         </div>
 
@@ -341,7 +318,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </h2>
 
           <p className="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
-            UniVault enforces Row-Level Security on every database transaction. Student records cannot be queried or decrypted by other users or unauthorized administrative personnel.
+            Privora enforces Row-Level Security on every database transaction. Student records cannot be queried or decrypted by other users or unauthorized administrative personnel.
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-4 text-xs font-mono">
@@ -372,7 +349,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             Frequently Asked Questions
           </h2>
           <p className="text-slate-400 text-sm mt-2">
-            Everything you need to know about UniVault security and operations.
+            Everything you need to know about Privora security and operations.
           </p>
         </div>
 
@@ -408,19 +385,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Lock className="w-4 h-4 text-blue-400" />
-            <span className="font-bold text-white">UniVault</span>
+            <span className="font-bold text-white">Privora</span>
             <span className="text-slate-600">·</span>
             <span>Smart Student Digital Locker</span>
           </div>
 
           <div className="flex items-center gap-6">
-            <button onClick={onLogin} className="hover:text-slate-300">
+            <button onClick={onLogin} className="hover:text-slate-300 cursor-pointer">
               Student Sign In
             </button>
-            <button onClick={onRegister} className="hover:text-slate-300">
+            <button onClick={onRegister} className="hover:text-slate-300 cursor-pointer">
               New Registration
             </button>
-            <button onClick={onDemoAdmin} className="hover:text-slate-300">
+            <button onClick={onLogin} className="hover:text-slate-300 cursor-pointer">
               Admin Portal
             </button>
           </div>

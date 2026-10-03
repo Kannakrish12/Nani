@@ -520,7 +520,7 @@ export class Database {
     // Initial welcome notification
     this.createNotification({
       userId: newUser.id,
-      title: 'Welcome to UniVault!',
+      title: 'Welcome to Privora!',
       message: 'Your secure student digital locker has been provisioned. Upload your first document to get started.',
       type: 'system',
     });
@@ -531,7 +531,7 @@ export class Database {
       action: 'ACCOUNT_CREATED',
       details: `New student registration completed: ${newUser.fullName} (${newUser.studentId})`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'success',
     });
 
@@ -559,7 +559,7 @@ export class Database {
       action: 'PROFILE_UPDATED',
       details: 'Updated student profile information and bio',
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'success',
     });
 
@@ -578,7 +578,7 @@ export class Database {
       action: 'PASSWORD_RESET',
       details: 'Student credential password reset verified',
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'warning',
     });
 
@@ -623,7 +623,7 @@ export class Database {
       action: 'DOCUMENT_UPLOAD',
       details: `Uploaded document: "${newDoc.name}" (${(newDoc.fileSize / 1024).toFixed(1)} KB)`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'success',
     });
 
@@ -667,7 +667,7 @@ export class Database {
       action: 'DOCUMENT_SOFT_DELETE',
       details: `Moved "${doc.name}" to Recycle Bin`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'warning',
     });
 
@@ -694,7 +694,7 @@ export class Database {
       action: 'DOCUMENT_RESTORED',
       details: `Restored document "${doc.name}" from Recycle Bin`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'success',
     });
 
@@ -715,7 +715,7 @@ export class Database {
       action: 'DOCUMENT_PERMANENT_DELETE',
       details: `Permanently destroyed encrypted record: "${deleted.name}"`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'alert',
     });
 
@@ -775,7 +775,7 @@ export class Database {
       action: 'SHARE_GENERATED',
       details: `Generated temporary ${params.accessType} link for "${doc.name}" (Expires in ${params.durationHours}h)`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'success',
     });
 
@@ -794,7 +794,7 @@ export class Database {
       action: 'SHARE_REVOKED',
       details: `Revoked access token for document "${doc?.name || 'Document'}"`,
       ipAddress: '127.0.0.1',
-      userAgent: 'UniVault Web Client',
+      userAgent: 'Privora Web Client',
       status: 'warning',
     });
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Lock, Mail, ArrowRight, AlertCircle, Loader2, Sparkles, UserCheck, X, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, ArrowRight, AlertCircle, Loader2, X, ArrowLeft } from 'lucide-react';
 
 interface LoginViewProps {
   onGoToRegister: () => void;
@@ -15,7 +15,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
   onSuccess,
   onClose,
 }) => {
-  const { login, demoLoginStudent, demoLoginAdmin, error, clearError } = useAuth();
+  const { login, error, clearError } = useAuth();
 
   const handleBack = () => {
     onClose();
@@ -36,30 +36,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
       onSuccess();
     } catch (err: any) {
       setLocalError(err.message || 'Login failed. Please verify credentials.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleStudentDemo = async () => {
-    setLoading(true);
-    try {
-      await demoLoginStudent();
-      onSuccess();
-    } catch (err: any) {
-      setLocalError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAdminDemo = async () => {
-    setLoading(true);
-    try {
-      await demoLoginAdmin();
-      onSuccess();
-    } catch (err: any) {
-      setLocalError(err.message);
     } finally {
       setLoading(false);
     }
@@ -101,41 +77,11 @@ export const LoginView: React.FC<LoginViewProps> = ({
             <Lock className="w-6 h-6" />
           </div>
           <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-            Sign In to UniVault
+            Sign In to Privora
           </h1>
           <p className="text-xs text-slate-400">
             Access your secure student credential locker
           </p>
-        </div>
-
-        {/* Quick 1-Click Demo Evaluation */}
-        <div className="p-3 bg-blue-950/30 border border-blue-800/50 rounded-xl space-y-2 text-xs">
-          <div className="flex items-center justify-between text-blue-300 font-semibold">
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-              1-Click Demo Logins
-            </span>
-            <span className="text-[10px] text-blue-400 font-mono">Instant Access</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={handleStudentDemo}
-              disabled={loading}
-              className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium text-xs transition-colors flex items-center justify-center gap-1.5"
-            >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>Student (Sarah)</span>
-            </button>
-            <button
-              type="button"
-              onClick={handleAdminDemo}
-              disabled={loading}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg font-medium text-xs transition-colors flex items-center justify-center gap-1.5"
-            >
-              <span>Admin (Marcus)</span>
-            </button>
-          </div>
         </div>
 
         {/* Error notice */}

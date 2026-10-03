@@ -31,7 +31,7 @@ import { PublicShareView } from './views/PublicShareView';
 import { SettingsView } from './views/SettingsView';
 
 function MainApp() {
-  const { user, loading, demoLoginStudent, demoLoginAdmin } = useAuth();
+  const { user, loading } = useAuth();
   const {
     previewDoc,
     setPreviewDoc,
@@ -94,7 +94,7 @@ function MainApp() {
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="space-y-3 text-center">
           <div className="w-10 h-10 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto" />
-          <div className="text-xs text-slate-400 font-medium">Initializing UniVault Secure Workspace...</div>
+          <div className="text-xs text-slate-400 font-medium">Initializing Privora Secure Workspace...</div>
         </div>
       </div>
     );
@@ -134,14 +134,6 @@ function MainApp() {
       <LandingPage
         onLogin={() => setAuthView('login')}
         onRegister={() => setAuthView('register')}
-        onDemoStudent={async () => {
-          await demoLoginStudent();
-          setCurrentView('dashboard');
-        }}
-        onDemoAdmin={async () => {
-          await demoLoginAdmin();
-          setCurrentView('admin');
-        }}
       />
     );
   }
@@ -168,7 +160,7 @@ function MainApp() {
         </div>
 
         {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full pb-24 lg:pb-8">
           {currentView === 'dashboard' && (
             <DashboardView
               setCurrentView={setCurrentView}
@@ -187,7 +179,10 @@ function MainApp() {
           )}
 
           {currentView === 'vaultai' && (
-            <VaultAIView />
+            <VaultAIView
+              setCurrentView={setCurrentView}
+              onOpenUpload={() => setIsUploadOpen(true)}
+            />
           )}
 
           {currentView === 'share-manage' && (

@@ -46,7 +46,7 @@ export const PublicShareView: React.FC<PublicShareViewProps> = ({ token, onGoHom
     const doc = data.document;
     const content =
       doc.fileData ||
-      `UNIVAULT TEMPORARY VERIFIED ATTESTATION\n========================================\nDocument: ${doc.name}\nCategory: ${doc.category}\nIssue Date: ${doc.issueDate || 'N/A'}\nExpiry Date: ${doc.expiryDate || 'N/A'}\nVerified on: ${new Date().toLocaleString()}\n\nAttested by UniVault Student Digital Locker Infrastructure.`;
+      `PRIVORA TEMPORARY VERIFIED ATTESTATION\n========================================\nDocument: ${doc.name}\nCategory: ${doc.category}\nIssue Date: ${doc.issueDate || 'N/A'}\nExpiry Date: ${doc.expiryDate || 'N/A'}\nVerified on: ${new Date().toLocaleString()}\n\nAttested by Privora Student Digital Locker Infrastructure.`;
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -67,7 +67,7 @@ export const PublicShareView: React.FC<PublicShareViewProps> = ({ token, onGoHom
           <div className="w-8 h-8 rounded-lg overflow-hidden border border-blue-500/30 flex items-center justify-center bg-blue-950/40">
             <Lock className="w-4 h-4 text-blue-400" />
           </div>
-          <span className="font-bold text-base tracking-tight text-white">UniVault</span>
+          <span className="font-bold text-base tracking-tight text-white">Privora</span>
           <span className="text-slate-600">·</span>
           <span className="text-xs text-slate-400">Secure Recipient View</span>
         </div>
@@ -76,7 +76,7 @@ export const PublicShareView: React.FC<PublicShareViewProps> = ({ token, onGoHom
           onClick={onGoHome}
           className="text-xs font-semibold text-blue-400 hover:text-blue-300"
         >
-          UniVault Platform
+          Privora Platform
         </button>
       </header>
 
@@ -101,7 +101,7 @@ export const PublicShareView: React.FC<PublicShareViewProps> = ({ token, onGoHom
                 onClick={onGoHome}
                 className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-medium"
               >
-                Return to UniVault Home
+                Return to Privora Home
               </button>
             </div>
           </div>
@@ -167,7 +167,7 @@ export const PublicShareView: React.FC<PublicShareViewProps> = ({ token, onGoHom
                 <span className="font-semibold text-slate-400 block mb-1 uppercase text-[10px]">
                   Description & Context
                 </span>
-                {data.document.description || 'Verified student credential attested in UniVault.'}
+                {data.document.description || 'Verified student credential attested in Privora.'}
               </div>
 
               {/* Dates & Metadata */}

@@ -39,7 +39,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
 
   const handleDownload = () => {
     // Generate downloadable text or simulated document data
-    const content = document.fileData || `UNIVAULT SECURE VERIFIED RECORD\n=================================\nDocument Name: ${document.name}\nCategory: ${document.category}\nFile Size: ${(document.fileSize / 1024).toFixed(1)} KB\nUploaded: ${new Date(document.createdAt).toLocaleString()}\nIssue Date: ${document.issueDate || 'N/A'}\nExpiry Date: ${document.expiryDate || 'N/A'}\nTags: ${document.tags.join(', ')}\nDescription: ${document.description}\n\nDigitally signed and attested by UniVault Student Information Infrastructure.`;
+    const content = document.fileData || `PRIVORA SECURE VERIFIED RECORD\n=================================\nDocument Name: ${document.name}\nCategory: ${document.category}\nFile Size: ${(document.fileSize / 1024).toFixed(1)} KB\nUploaded: ${new Date(document.createdAt).toLocaleString()}\nIssue Date: ${document.issueDate || 'N/A'}\nExpiry Date: ${document.expiryDate || 'N/A'}\nTags: ${document.tags.join(', ')}\nDescription: ${document.description}\n\nDigitally signed and attested by Privora Student Information Infrastructure.`;
 
     const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -152,7 +152,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
                 <div className="flex items-start justify-between border-b border-slate-800/80 pb-4 mb-6">
                   <div>
                     <span className="text-[10px] font-mono tracking-widest text-blue-400 uppercase">
-                      UniVault Attested Record
+                      Privora Attested Record
                     </span>
                     <h3 className="text-base font-bold text-white mt-0.5">
                       {document.name}
@@ -169,7 +169,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
                       Document Description
                     </div>
                     <p className="text-slate-300 mt-1 leading-relaxed">
-                      {document.description || 'Verified student digital credential stored in UniVault.'}
+                      {document.description || 'Verified student digital credential stored in Privora.'}
                     </p>
                   </div>
 
