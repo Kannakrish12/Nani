@@ -1,0 +1,461 @@
+{
+  "users": [
+    {
+      "id": "stu-sarah-chen-001",
+      "email": "sarah.chen@stanford.edu",
+      "passwordHash": "cea1b908791e88fee55e75065af04f3ad28049b8482bc993b33e67f5c33341c4",
+      "fullName": "Sarah Chen",
+      "studentId": "STU-2024-8849",
+      "university": "Stanford University",
+      "department": "Computer Science & Engineering",
+      "year": "3rd Year",
+      "section": "CS-A",
+      "phone": "+1 (650) 492-3891",
+      "bio": "Junior CS student specializing in Distributed Systems and Cloud Architecture. Vice President of Collegiate ACM.",
+      "avatarUrl": "/src/assets/images/avatar_student_sarah_1791018751353.jpg",
+      "role": "student",
+      "status": "active",
+      "createdAt": "2026-07-05T09:21:24.183Z",
+      "updatedAt": "2026-10-01T09:21:24.183Z"
+    },
+    {
+      "id": "adm-marcus-vance-002",
+      "email": "admin@univault.edu",
+      "passwordHash": "6c08014c8b99f593e8139b481ef8d0f57b4b22941ea1f9041cc228c6c8be196f",
+      "fullName": "Dr. Marcus Vance",
+      "studentId": "FAC-REG-9011",
+      "university": "Stanford University",
+      "department": "Office of Academic Records & Registrar",
+      "year": "Faculty / Staff",
+      "section": "Registrar Admin",
+      "phone": "+1 (650) 723-2000",
+      "bio": "Dean of Student Records & University Registrar. Administering digital credentials and compliance.",
+      "avatarUrl": "/src/assets/images/avatar_admin_marcus_1791018767335.jpg",
+      "role": "admin",
+      "status": "active",
+      "createdAt": "2026-04-06T09:21:24.183Z",
+      "updatedAt": "2026-09-23T09:21:24.183Z"
+    },
+    {
+      "id": "stu-927e8d79-e9cd-449b-b935-5e2c9f4dce25",
+      "email": "suryakalyan591@gmail.com",
+      "passwordHash": "ea091b6941074a81dc7a8536ecae8e9dfb2e72c35ac9628c5e8000e62bbca335",
+      "fullName": "Nani",
+      "studentId": "R240599",
+      "university": "Rgukt rk valley ",
+      "department": "CSE",
+      "year": "1st Year",
+      "section": "A",
+      "phone": "963596254 6",
+      "bio": "Student at Rgukt rk valley , CSE.",
+      "role": "student",
+      "status": "active",
+      "createdAt": "2026-10-03T09:44:53.293Z",
+      "updatedAt": "2026-10-03T09:44:53.293Z"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-001",
+      "userId": "stu-sarah-chen-001",
+      "name": "Semester 5 Official Grade Transcript",
+      "category": "Academic",
+      "description": "Verified official university grade report with 3.94 GPA and Dean’s Honors List endorsement.",
+      "fileType": "application/pdf",
+      "fileSize": 420000,
+      "issueDate": "2026-01-15",
+      "expiryDate": null,
+      "tags": [
+        "Transcript",
+        "GPA",
+        "Dean List",
+        "Official"
+      ],
+      "isImportant": true,
+      "isDeleted": false,
+      "createdAt": "2026-08-24T09:21:24.183Z",
+      "updatedAt": "2026-08-24T09:21:24.183Z"
+    },
+    {
+      "id": "doc-002",
+      "userId": "stu-sarah-chen-001",
+      "name": "Annual Family Income Certificate 2025-26",
+      "category": "Financial",
+      "description": "Official revenue department income declaration certificate for scholarship eligibility.",
+      "fileType": "application/pdf",
+      "fileSize": 312000,
+      "issueDate": "2025-10-20",
+      "expiryDate": "2026-10-21",
+      "tags": [
+        "Income",
+        "Revenue",
+        "Scholarship",
+        "Eligibility"
+      ],
+      "isImportant": true,
+      "isDeleted": false,
+      "createdAt": "2026-09-03T09:21:24.183Z",
+      "updatedAt": "2026-09-03T09:21:24.183Z"
+    },
+    {
+      "id": "doc-003",
+      "userId": "stu-sarah-chen-001",
+      "name": "University Student Photo ID Card (2024-2026)",
+      "category": "Identity",
+      "description": "Biometric student campus card granting library, laboratory, and residence hall access.",
+      "fileType": "image/png",
+      "fileSize": 185000,
+      "issueDate": "2024-09-01",
+      "expiryDate": "2026-12-27",
+      "tags": [
+        "Campus ID",
+        "Biometrics",
+        "SmartCard"
+      ],
+      "isImportant": true,
+      "isDeleted": false,
+      "createdAt": "2026-07-15T09:21:24.183Z",
+      "updatedAt": "2026-07-15T09:21:24.183Z"
+    },
+    {
+      "id": "doc-004",
+      "userId": "stu-sarah-chen-001",
+      "name": "Global Collegiate Hackathon Winner Certificate",
+      "category": "Achievements",
+      "description": "1st Place Grand Winner Award in AI & Decentralized Systems track amongst 400 collegiate teams.",
+      "fileType": "application/pdf",
+      "fileSize": 580000,
+      "issueDate": "2025-11-12",
+      "expiryDate": null,
+      "tags": [
+        "Hackathon",
+        "Award",
+        "AI",
+        "Winner"
+      ],
+      "isImportant": true,
+      "isDeleted": false,
+      "createdAt": "2026-08-14T09:21:24.183Z",
+      "updatedAt": "2026-08-14T09:21:24.183Z"
+    },
+    {
+      "id": "doc-005",
+      "userId": "stu-sarah-chen-001",
+      "name": "Summer Software Engineering Internship Offer Letter",
+      "category": "Career",
+      "description": "Accepted offer letter for Summer 2026 Systems Software Intern at Vertex Cloud Labs.",
+      "fileType": "application/pdf",
+      "fileSize": 245000,
+      "issueDate": "2026-02-01",
+      "expiryDate": null,
+      "tags": [
+        "Internship",
+        "Offer Letter",
+        "Career",
+        "2026"
+      ],
+      "isImportant": true,
+      "isDeleted": false,
+      "createdAt": "2026-09-08T09:21:24.183Z",
+      "updatedAt": "2026-09-08T09:21:24.183Z"
+    },
+    {
+      "id": "doc-006",
+      "userId": "stu-sarah-chen-001",
+      "name": "State Driver License & Identity Proof",
+      "category": "Identity",
+      "description": "State DMV identification and legal residential proof.",
+      "fileType": "image/jpeg",
+      "fileSize": 320000,
+      "issueDate": "2023-05-14",
+      "expiryDate": "2027-11-27",
+      "tags": [
+        "Govt ID",
+        "Driver License",
+        "Address Proof"
+      ],
+      "isImportant": false,
+      "isDeleted": false,
+      "createdAt": "2026-08-04T09:21:24.183Z",
+      "updatedAt": "2026-08-04T09:21:24.183Z"
+    },
+    {
+      "id": "doc-007",
+      "userId": "stu-sarah-chen-001",
+      "name": "Secondary Education Board Diploma (10th Standard)",
+      "category": "Academic",
+      "description": "Certified secondary school completion certificate with mathematics and sciences distinction.",
+      "fileType": "application/pdf",
+      "fileSize": 490000,
+      "issueDate": "2022-06-10",
+      "expiryDate": null,
+      "tags": [
+        "High School",
+        "10th Board",
+        "Distinction"
+      ],
+      "isImportant": false,
+      "isDeleted": false,
+      "createdAt": "2026-07-10T09:21:24.183Z",
+      "updatedAt": "2026-07-10T09:21:24.183Z"
+    },
+    {
+      "id": "doc-del-001",
+      "userId": "stu-sarah-chen-001",
+      "name": "Temporary Campus Parking Permit 2025",
+      "category": "Other",
+      "description": "Temporary parking pass for North Campus Lot B.",
+      "fileType": "application/pdf",
+      "fileSize": 110000,
+      "issueDate": "2025-08-20",
+      "expiryDate": "2025-12-31",
+      "tags": [
+        "Parking",
+        "Transit"
+      ],
+      "isImportant": false,
+      "isDeleted": true,
+      "deletedAt": "2026-09-30T09:21:24.184Z",
+      "createdAt": "2026-06-05T09:21:24.184Z",
+      "updatedAt": "2026-09-30T09:21:24.184Z"
+    }
+  ],
+  "shares": [
+    {
+      "id": "share-886563a6-6f65-410e-9b89-33d088edc10e",
+      "documentId": "doc-001",
+      "userId": "stu-sarah-chen-001",
+      "token": "shr_e848eb0288ccabdd15d6aed52102531e",
+      "accessType": "view",
+      "expiresAt": "2026-10-04T09:21:57.978Z",
+      "oneTimeAccess": false,
+      "viewCount": 1,
+      "status": "active",
+      "createdAt": "2026-10-03T09:21:57.978Z"
+    },
+    {
+      "id": "share-001",
+      "documentId": "doc-005",
+      "userId": "stu-sarah-chen-001",
+      "token": "shr_vtx_d0e43175f58ca047",
+      "accessType": "view",
+      "expiresAt": "2026-10-04T09:21:24.184Z",
+      "oneTimeAccess": false,
+      "viewCount": 3,
+      "status": "active",
+      "createdAt": "2026-10-02T09:21:24.184Z"
+    }
+  ],
+  "checklists": [
+    {
+      "id": "cl-001",
+      "userId": "stu-sarah-chen-001",
+      "title": "Merit-Based Scholarship Application 2026",
+      "type": "scholarship",
+      "createdAt": "2026-09-19T09:21:24.184Z",
+      "updatedAt": "2026-10-02T09:21:24.184Z",
+      "items": [
+        {
+          "id": "cli-1",
+          "label": "University Student ID",
+          "completed": true,
+          "linkedDocumentId": "doc-003",
+          "required": true
+        },
+        {
+          "id": "cli-2",
+          "label": "Previous Semester Marks Transcript",
+          "completed": true,
+          "linkedDocumentId": "doc-001",
+          "required": true
+        },
+        {
+          "id": "cli-3",
+          "label": "Income Certificate (Valid for FY26)",
+          "completed": true,
+          "linkedDocumentId": "doc-002",
+          "required": true
+        },
+        {
+          "id": "cli-4",
+          "label": "Academic Achievement or Award Proof",
+          "completed": true,
+          "linkedDocumentId": "doc-004",
+          "required": false
+        },
+        {
+          "id": "cli-5",
+          "label": "Bonafide Student Certificate from Registrar",
+          "completed": false,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "cl-002",
+      "userId": "stu-sarah-chen-001",
+      "title": "Summer 2026 Internship Onboarding Package",
+      "type": "internship",
+      "createdAt": "2026-09-26T09:21:24.184Z",
+      "updatedAt": "2026-10-01T09:21:24.184Z",
+      "items": [
+        {
+          "id": "cli-201",
+          "label": "Signed Offer Letter",
+          "completed": true,
+          "linkedDocumentId": "doc-005",
+          "required": true
+        },
+        {
+          "id": "cli-202",
+          "label": "Government Photo Identity Proof",
+          "completed": true,
+          "linkedDocumentId": "doc-006",
+          "required": true
+        },
+        {
+          "id": "cli-203",
+          "label": "Official University Transcripts",
+          "completed": true,
+          "linkedDocumentId": "doc-001",
+          "required": true
+        },
+        {
+          "id": "cli-204",
+          "label": "Direct Deposit Bank Information & Void Cheque",
+          "completed": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif-0d150fa1-0680-42d2-991c-977dd0955b00",
+      "userId": "stu-927e8d79-e9cd-449b-b935-5e2c9f4dce25",
+      "title": "Welcome to UniVault!",
+      "message": "Your secure student digital locker has been provisioned. Upload your first document to get started.",
+      "type": "system",
+      "read": false,
+      "createdAt": "2026-10-03T09:44:53.293Z"
+    },
+    {
+      "id": "notif-eaf94ca3-f06a-4f83-98f7-a8eed82f28bb",
+      "userId": "stu-sarah-chen-001",
+      "title": "Secure Share Generated",
+      "message": "A temporary link for \"Semester 5 Official Grade Transcript\" valid for 24 hours was created.",
+      "type": "share",
+      "read": false,
+      "createdAt": "2026-10-03T09:21:57.979Z"
+    },
+    {
+      "id": "notif-001",
+      "userId": "stu-sarah-chen-001",
+      "title": "Document Expiring Soon",
+      "message": "Your \"Annual Family Income Certificate 2025-26\" expires in 18 days. Please obtain a renewal from the revenue department.",
+      "type": "expiry",
+      "read": false,
+      "createdAt": "2026-10-02T09:21:24.184Z"
+    },
+    {
+      "id": "notif-002",
+      "userId": "stu-sarah-chen-001",
+      "title": "Secure Link Created",
+      "message": "A temporary 24-hour viewing link was generated for \"Summer Software Engineering Internship Offer Letter\".",
+      "type": "share",
+      "read": false,
+      "createdAt": "2026-10-02T09:21:24.184Z"
+    },
+    {
+      "id": "notif-003",
+      "userId": "stu-sarah-chen-001",
+      "title": "Document Encrypted & Backed Up",
+      "message": "\"Semester 5 Official Grade Transcript\" was verified and safely cataloged under Academic.",
+      "type": "upload",
+      "read": true,
+      "createdAt": "2026-09-21T09:21:24.184Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "log-dadd44c4-65cf-4606-a590-04a74a36a0d3",
+      "userId": "stu-sarah-chen-001",
+      "action": "LOGIN",
+      "details": "Successful sign-in for Sarah Chen (student)",
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "curl/7.88.1",
+      "status": "success",
+      "createdAt": "2026-10-03T09:47:50.387Z"
+    },
+    {
+      "id": "log-9d3a4404-2caa-4c89-8dc9-53fe5673f9c5",
+      "userId": "stu-927e8d79-e9cd-449b-b935-5e2c9f4dce25",
+      "action": "ACCOUNT_CREATED",
+      "details": "New student registration completed: Nani (R240599)",
+      "ipAddress": "127.0.0.1",
+      "userAgent": "UniVault Web Client",
+      "status": "success",
+      "createdAt": "2026-10-03T09:44:53.293Z"
+    },
+    {
+      "id": "log-0e059a14-9de7-40d8-90c7-b5b16caedd56",
+      "userId": "stu-sarah-chen-001",
+      "action": "SHARE_GENERATED",
+      "details": "Generated temporary view link for \"Semester 5 Official Grade Transcript\" (Expires in 24h)",
+      "ipAddress": "127.0.0.1",
+      "userAgent": "UniVault Web Client",
+      "status": "success",
+      "createdAt": "2026-10-03T09:21:57.979Z"
+    },
+    {
+      "id": "log-15c81a77-f595-4b29-9698-d57658ad944c",
+      "userId": "stu-sarah-chen-001",
+      "action": "LOGIN",
+      "details": "Successful sign-in for Sarah Chen (student)",
+      "ipAddress": "::ffff:127.0.0.1",
+      "userAgent": "curl/7.88.1",
+      "status": "success",
+      "createdAt": "2026-10-03T09:21:36.915Z"
+    },
+    {
+      "id": "log-001",
+      "userId": "stu-sarah-chen-001",
+      "action": "LOGIN",
+      "details": "Successful biometric / session authentication from Chrome macOS (104.28.19.42)",
+      "ipAddress": "104.28.19.42",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "status": "success",
+      "createdAt": "2026-10-02T09:21:24.184Z"
+    },
+    {
+      "id": "log-002",
+      "userId": "stu-sarah-chen-001",
+      "action": "SHARE_GENERATED",
+      "details": "Created 24-hr view link for \"Summer Software Engineering Internship Offer Letter\"",
+      "ipAddress": "104.28.19.42",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "status": "success",
+      "createdAt": "2026-10-02T09:21:24.184Z"
+    },
+    {
+      "id": "log-003",
+      "userId": "stu-sarah-chen-001",
+      "action": "DOCUMENT_UPLOAD",
+      "details": "Uploaded and encrypted document: \"Annual Family Income Certificate 2025-26\" (312 KB)",
+      "ipAddress": "104.28.19.42",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "status": "success",
+      "createdAt": "2026-09-03T09:21:24.184Z"
+    },
+    {
+      "id": "log-004",
+      "userId": "stu-sarah-chen-001",
+      "action": "DOCUMENT_SOFT_DELETE",
+      "details": "Moved \"Temporary Campus Parking Permit 2025\" to Recycle Bin",
+      "ipAddress": "104.28.19.42",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      "status": "warning",
+      "createdAt": "2026-09-30T09:21:24.184Z"
+    }
+  ]
+}

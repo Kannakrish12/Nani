@@ -1,0 +1,6 @@
+{
+  "name": "UniVault — Smart Student Digital Locker",
+  "description": "A secure university-level digital locker and student information manager with AI assistant, document expiry tracking, and encrypted temporary sharing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
